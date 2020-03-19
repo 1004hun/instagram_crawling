@@ -74,7 +74,7 @@ while True:
 
 
 
-## 해시태크 가져오기
+## 해시태그 가져오기
 num_of_data = len(reallink)
 
 print('총 {0}개의 데이터를 수집합니다.'.format(num_of_data))
