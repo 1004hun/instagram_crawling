@@ -28,11 +28,11 @@ time.sleep(2)
 
 elem_login = driver.find_element_by_name("username")
 elem_login.clear()
-elem_login.send_keys('baaangsooo')
+elem_login.send_keys('YOUR_ID')
 
 elem_login = driver.find_element_by_name('password')
 elem_login.clear()
-elem_login.send_keys('!yangsoon2@.')
+elem_login.send_keys('YOUR_PASSWORD')
 
 time.sleep(1)
 
