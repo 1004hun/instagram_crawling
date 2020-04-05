@@ -22,6 +22,7 @@ driver = webdriver.Chrome(
 driver.get(url)
 time.sleep(3)
 
+
 # 로그인 하기
 login_section = '//*[@id="react-root"]/section/nav/div[2]/div/div/div[3]/div/span/a[1]/button'
 driver.find_element_by_xpath(login_section).click()
@@ -42,6 +43,17 @@ xpath = """//*[@id="react-root"]/section/main/div/article/div/div[1]/div/form/di
 driver.find_element_by_xpath(xpath).click()
 
 time.sleep(4)
+
+
+# 총 게시물 숫자 불러오기
+pageString = driver.page_source
+bsObj = BeautifulSoup(pageString, 'lxml')
+temp_data = bsObj.find_all(name='meta')[-1]
+temp_data = str(temp_data)
+start = temp_data.find('게시물') + 4
+end = temp_data.find('개')
+total_data = temp_data[start:end]
+print("총 {0}개의 게시물이 검색되었습니다.".format(total_data))
 
 """태그 크롤링"""
 print("게시물을 수집하는 중입니다.")
@@ -84,7 +96,7 @@ num_of_data = len(reallink)
 batch_size = 100
 num_batch = num_of_data // batch_size + 1
 
-
+print("검색된 {0}개의 게시물 중 {1}개의 게시물을 가지고오는데 성공하였습니다.".format(total_data, num_of_data))
 print('총 {0}개의 데이터를 수집합니다.'.format(num_of_data))
 
 ## 해시태그 가져오기
@@ -141,4 +153,4 @@ for batch in range(num_batch):
 data = pd.DataFrame(csvtext)
 data.to_csv('insta.txt', encoding='utf-8')
 
-driver.close()
+# driver.close()
